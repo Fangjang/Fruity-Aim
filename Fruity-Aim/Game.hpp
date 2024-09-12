@@ -10,8 +10,15 @@ private:
 	sf::RenderWindow window;
 	sf::Event event;
 
+	//Fonts
+	sf::Font font;
+
+	//Sprites
+	sf::Sprite sprite;
+	
 	//Private Methods
 	void initWindow();
+	void initFonts();
 public:
 	//Constructor and Destructor
 	Game();

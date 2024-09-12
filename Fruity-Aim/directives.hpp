@@ -12,4 +12,7 @@
 #include<string>
 #include<vector>
 
+//Win32
+#include <windows.h>
+
 #endif // !DIRECTIVES_HPP
