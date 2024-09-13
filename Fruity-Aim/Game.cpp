@@ -96,7 +96,10 @@ void Game::update()
 	{
 		if (event.type == sf::Event::Closed)
 		{
+			delete menuAnimator;
+			menuAnimator = nullptr;
 			window.close();
+			exit(0);
 		}
 	}
 
