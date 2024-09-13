@@ -61,7 +61,7 @@ void Game::initFonts()
 //Initialize menu animation
 void Game::initMenuAnimation()
 {
-	menuAnimator = new MenuAnimator(spriteMenuFruits, 10.f, 0.5f);
+	menuAnimator = new MenuAnimator(&spriteMenuFruits, 18.f, 2.8f, &font);
 }
 
 /// 
@@ -70,6 +70,7 @@ void Game::initMenuAnimation()
 //Constructor and Destructor
 Game::Game()
 {
+	menuAnimator = nullptr;
 	initWindow();
 	initTextures();
 	initFonts();
@@ -99,6 +100,14 @@ void Game::update()
 		}
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+	{
+		delete menuAnimator;
+		menuAnimator = nullptr;
+		window.close();
+		exit(0);
+	}
+
 	//Update menu animation
 	menuAnimator->update();
 }
@@ -110,6 +119,11 @@ void Game::render()
 	window.draw(spriteBackground);
 	
 	//Drawing menu animation
-	menuAnimator->render(window);
+	if (menuAnimator != nullptr)
+	{
+		menuAnimator->render(window);
+	}
+
+	//Displaying window
 	window.display();
 }

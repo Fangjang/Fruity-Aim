@@ -7,7 +7,7 @@ class MenuAnimator
 {
 private:
 	//Menu Animation Var
-	sf::Sprite spriteMenuFruits;
+	sf::Sprite* spriteMenuFruits;
 
 	//Clock
 	float deltaTime;
@@ -20,15 +20,27 @@ private:
 		DOWN
 	} enumMenuState;
 
+	//Animation Variables
 	float floatDist;
 	float currentDist;
 	float speed;
+
+	//Font
+	//UI font
+	sf::Font* font;
+	//Title font
+	sf::Font fontTitle;
 	
+	//Menu Text;
+	sf::Text textTitle;
+	sf::Text textStartPrompt;
+
 	//Private Methods
+	void initFont();
 	void initAnimation();
 public:
 	//Constructor and Destructor
-	MenuAnimator(sf::Sprite& spriteMenuFruits, float floatDist, float speed);
+	MenuAnimator(sf::Sprite* spriteMenuFruits, float floatDist, float speed, sf::Font* font);
 	~MenuAnimator();
 
 	//Public Methods
