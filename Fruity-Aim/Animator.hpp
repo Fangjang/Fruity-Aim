@@ -14,6 +14,9 @@ private:
 	// Sprite to be animated
 	sf::Sprite sprite;
 
+	//Sprite location
+	sf::Vector2f position;
+
 	// Frame size
 	int frameWidth;
 	int frameHeight;
@@ -32,10 +35,7 @@ private:
 	//Public Variables
 public:
 	//Constructor and Destructor
-	Animator(sf::RenderWindow* window, sf::Sprite sprite, int frameWidth, int frameHeight, int totalFrames, float frameDuration)
-		: window(window), sprite(sprite), frameWidth(frameWidth), frameHeight(frameHeight),
-		totalFrames(totalFrames), frameDuration(frameDuration), currentFrame(0), elapsedTime(0.0f) 
-		{}
+	Animator(sf::RenderWindow* window, sf::Sprite sprite, int frameWidth, int frameHeight, int totalFrames, float frameDuration);
 	~Animator();
 
 	//Public Methods

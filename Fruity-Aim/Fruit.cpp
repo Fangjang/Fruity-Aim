@@ -1,5 +1,6 @@
 #include"Game.hpp"
 
+//Main function
 int main()
 {
 	//Create Game object

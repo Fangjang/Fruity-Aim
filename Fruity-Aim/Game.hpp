@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "directives.hpp"
+#include "menuAnimator.hpp"
 
 class Game
 {
@@ -15,10 +16,24 @@ private:
 
 	//Sprites
 	sf::Sprite sprite;
+
+	//For background
+	sf::Texture textureBackground;
+	sf::Sprite spriteBackground;
+
+	//Menu Animation
+	MenuAnimator* menuAnimator;
+
+	//For menu
+	sf::Texture textureMenuFruits;
+	sf::RectangleShape menuFruits;
+	sf::Sprite spriteMenuFruits;
 	
 	//Private Methods
 	void initWindow();
+	void initTextures();
 	void initFonts();
+	void initMenuAnimation();
 public:
 	//Constructor and Destructor
 	Game();

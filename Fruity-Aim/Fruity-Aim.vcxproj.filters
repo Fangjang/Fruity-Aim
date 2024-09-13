@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Animator">
+      <UniqueIdentifier>{42e5d1b7-f207-47bf-a8db-af4ce97680a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Animator\Menu">
+      <UniqueIdentifier>{66da866b-1313-423c-8850-47e133b3fa34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Fruit.cpp">
@@ -27,5 +33,19 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>Source Files\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="menuAnimator.hpp">
+      <Filter>Source Files\Animator\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="menuAnimator.cpp">
+      <Filter>Source Files\Animator\Menu</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Animator.hpp">
+      <Filter>Source Files\Animator</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
