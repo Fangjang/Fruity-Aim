@@ -3,6 +3,7 @@
 
 #include "directives.hpp"
 #include "menuAnimator.hpp"
+#include "GamePlay.hpp"
 
 class Game
 {
@@ -10,6 +11,9 @@ private:
 	//Game window Variables
 	sf::RenderWindow window;
 	sf::Event event;
+
+	//Program State
+	enum class GameState { MENU, GAMEPLAY, GAMEOVER } enumGameState;
 
 	//Fonts
 	sf::Font font;
@@ -23,6 +27,7 @@ private:
 
 	//Menu Animation
 	MenuAnimator* menuAnimator;
+	GamePlay* gamePlay;
 
 	//For menu
 	sf::Texture textureMenuFruits;

@@ -22,6 +22,19 @@ Animator::Animator(sf::RenderWindow* window, sf::Sprite sprite, int frameWidth, 
 {
 	initAnimation();
 }
+
+//Constructor
+Animator::Animator(sf::RenderWindow* window, sf::Font* font, std::string string, float frameDuration, sf::Vector2f position)
+{
+	//Initialize position
+	position = sf::Vector2f(0.0f, 0.0f);
+	//Initialize text
+	text.setString(string);
+	text.setFont(*font);
+	text.setCharacterSize(24);
+	text.setFillColor(sf::Color::White);
+	text.setPosition(position);
+}
 //Destructor
 Animator::~Animator()
 {

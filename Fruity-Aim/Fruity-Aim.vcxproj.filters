@@ -13,15 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Animator">
-      <UniqueIdentifier>{42e5d1b7-f207-47bf-a8db-af4ce97680a7}</UniqueIdentifier>
+    <Filter Include="Source Files\GamePlay">
+      <UniqueIdentifier>{0e4fa609-20e8-4887-8baf-ff43fb29fc93}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Animator\Menu">
+    <Filter Include="Source Files\Menu">
       <UniqueIdentifier>{66da866b-1313-423c-8850-47e133b3fa34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GamePlay\Fruit">
+      <UniqueIdentifier>{1614b7ba-151c-4e4c-8d53-13add0290f03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Fruit.cpp">
+    <ClCompile Include="FruityAim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game.hpp">
@@ -33,19 +36,25 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>Source Files\Animator</Filter>
-    </ClCompile>
     <ClCompile Include="menuAnimator.hpp">
-      <Filter>Source Files\Animator\Menu</Filter>
+      <Filter>Source Files\Menu</Filter>
     </ClCompile>
     <ClCompile Include="menuAnimator.cpp">
-      <Filter>Source Files\Animator\Menu</Filter>
+      <Filter>Source Files\Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePlay.cpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="Fruit.cpp">
+      <Filter>Source Files\GamePlay\Fruit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animator.hpp">
-      <Filter>Source Files\Animator</Filter>
+    <ClInclude Include="GamePlay.hpp">
+      <Filter>Source Files\GamePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="Fruit.hpp">
+      <Filter>Source Files\GamePlay\Fruit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

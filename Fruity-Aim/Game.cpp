@@ -20,6 +20,9 @@ void Game::initWindow()
 	}
 	//Set frame per second limit
 	window.setFramerateLimit(60);
+
+	//Set game state
+	enumGameState = GameState::MENU;
 }
 
 //Initiliaze Textures
@@ -71,11 +74,12 @@ void Game::initMenuAnimation()
 Game::Game()
 {
 	menuAnimator = nullptr;
+	gamePlay = nullptr;
 	initWindow();
 	initTextures();
 	initFonts();
 	initMenuAnimation();
-}
+}	
 //Destructor
 Game::~Game()
 {
@@ -96,23 +100,69 @@ void Game::update()
 	{
 		if (event.type == sf::Event::Closed)
 		{
-			delete menuAnimator;
-			menuAnimator = nullptr;
+			if (menuAnimator != nullptr)
+			{
+				delete menuAnimator;
+				menuAnimator = nullptr;
+			}
+			if (gamePlay != nullptr)
+			{
+				delete gamePlay;
+				gamePlay = nullptr;
+			}
 			window.close();
 			exit(0);
 		}
 	}
 
+	//Exit on escape
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
-		delete menuAnimator;
-		menuAnimator = nullptr;
+		if (menuAnimator != nullptr)
+		{
+			delete menuAnimator;
+			menuAnimator = nullptr;
+		}
+		std::cout << "Menu ANimator Class Destroyed" << std::endl;
 		window.close();
+		std::cout << "Game Closed" << std::endl;
 		exit(0);
 	}
 
-	//Update menu animation
-	menuAnimator->update();
+
+	switch (enumGameState)
+	{
+	case Game::GameState::MENU:
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			if (menuAnimator->isMenuStatic() == false)
+			{
+				menuAnimator->setMenuStatic();
+			}
+		}
+		//Update menu animation
+		if (menuAnimator != nullptr)
+		{
+			menuAnimator->update();
+			if (menuAnimator->isWrapUp())
+			{
+				delete menuAnimator;
+				menuAnimator = nullptr;
+				enumGameState = GameState::GAMEPLAY;
+				gamePlay = new GamePlay(&window);
+			}
+		}
+		break;
+	case Game::GameState::GAMEPLAY:
+		if (gamePlay == nullptr)
+			break;
+		gamePlay->update();
+		break;
+	case Game::GameState::GAMEOVER:
+		break;
+	default:
+		break;
+	}
 }
 
 //Renders the game
@@ -121,10 +171,24 @@ void Game::render()
 	//Drawing background
 	window.draw(spriteBackground);
 	
-	//Drawing menu animation
-	if (menuAnimator != nullptr)
+	switch (enumGameState)
 	{
-		menuAnimator->render(window);
+	case Game::GameState::MENU:
+		//Drawing menu animation
+		if (menuAnimator != nullptr)
+		{
+			menuAnimator->render(window);
+		}
+		break;
+	case Game::GameState::GAMEPLAY:
+		if (gamePlay == nullptr)
+			break;
+		gamePlay->render(&window);
+		break;
+	case Game::GameState::GAMEOVER:
+		break;
+	default:
+		break;
 	}
 
 	//Displaying window

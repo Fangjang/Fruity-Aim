@@ -17,6 +17,17 @@ private:
 	//Sprite location
 	sf::Vector2f position;
 
+	//Texture to be animated
+	sf::Texture* texture;
+
+	//Text to be animated
+	sf::Text text;
+
+	enum class AnimationType {
+		SPRITE,
+		TEXT
+	};
+
 	// Frame size
 	int frameWidth;
 	int frameHeight;
@@ -35,7 +46,10 @@ private:
 	//Public Variables
 public:
 	//Constructor and Destructor
+	//Constructor for Sprite
 	Animator(sf::RenderWindow* window, sf::Sprite sprite, int frameWidth, int frameHeight, int totalFrames, float frameDuration);
+	//Constructor for text
+	Animator(sf::RenderWindow* window, sf::Font* font, std::string string, float frameDuration, sf::Vector2f position);
 	~Animator();
 
 	//Public Methods
