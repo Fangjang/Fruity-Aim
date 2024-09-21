@@ -142,10 +142,12 @@
     <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="menuAnimator.cpp" />
     <ClCompile Include="menuAnimator.hpp" />
+    <ClCompile Include="WallSplash.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fruit.hpp" />
     <ClInclude Include="GamePlay.hpp" />
+    <ClInclude Include="WallSplash.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

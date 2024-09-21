@@ -12,9 +12,26 @@ void Fruit::initVariables()
 {
 	//Set the Rotation Direction
 	enumRotationDirection = RotationDirection::LEFT;
+	//Set falling state
+	enumFallingState = FallingState::RISING;
+
+	//Set Rotation Speed
+	fRotationSpeed = 5.0f;
+
+	//Set Gravity
+	fMaxHeight = rand() % (320 - 180) + 180;
+	//Set Spwaning Position on X axis
+	fSpwanXpos = rand() % (780 - 250) + 250;
+
+	//X axis move Threshold
+	fMoveThresholdX = 1.5f;
+	//Y axis move Threshold
+	fMoveThresholdY = 1.2f;
+	//Initial Speed
+	fInitialSpeed = 20.0f;
 
 	//Set the Fruit Sprite position
-	spriteFruit.setPosition(100.0f, 100.0f);
+	spriteFruit.setPosition(fSpwanXpos, 620.0f);
 }
 
 //Initializes the Fruit
@@ -58,7 +75,56 @@ sf::FloatRect Fruit::getGlobalBounds()
 //Updates the Fruit
 void Fruit::update()
 {
-	spriteFruit.rotate(2.0f);
+	//Rotate the Fruit
+	switch (enumRotationDirection)
+	{
+	case Fruit::RotationDirection::LEFT:
+		spriteFruit.rotate(-fRotationSpeed);
+		spriteFruit.move(-fMoveThresholdX, 0.0f);
+		break;
+	case Fruit::RotationDirection::RIGHT:
+		spriteFruit.rotate(fRotationSpeed);
+		spriteFruit.move(fMoveThresholdX, 0.0f);
+		break;
+	default:
+		break;
+	}
+
+	switch (enumFallingState)
+	{
+	case Fruit::FallingState::RISING:
+		{
+			float tempYthrehold = fMoveThresholdY * (1.1 - fMoveThresholdY);
+			if (spriteFruit.getPosition().y > fMaxHeight && !(spriteFruit.getPosition().y - tempYthrehold < fMaxHeight))
+			{
+				float tempY = fInitialSpeed * tempYthrehold;
+				spriteFruit.move(0.0f, -tempY);
+			}
+			else
+			{
+				enumFallingState = FallingState::FALLING;
+			}
+			break;
+		}
+	case Fruit::FallingState::FALLING:
+		{
+			if (spriteFruit.getPosition().y < 650)
+			{
+				spriteFruit.move(0.0f, 20);
+			}
+			else
+			{
+				enumFallingState = FallingState::DESTROY;
+			}
+			break;
+		}
+	case Fruit::FallingState::DESTROY:
+		{
+			break;
+		}
+	default:
+		break;
+	}
 }
 
 //Renders the Fruit

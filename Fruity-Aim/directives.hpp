@@ -11,6 +11,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<cmath>
 
 //Win32
 #include <windows.h>

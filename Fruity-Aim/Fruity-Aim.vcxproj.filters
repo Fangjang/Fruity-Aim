@@ -22,6 +22,9 @@
     <Filter Include="Source Files\GamePlay\Fruit">
       <UniqueIdentifier>{1614b7ba-151c-4e4c-8d53-13add0290f03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GamePlay\WallSplash">
+      <UniqueIdentifier>{8d127a94-e796-486d-8c53-15d0b09c31b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FruityAim.cpp">
@@ -48,6 +51,9 @@
     <ClCompile Include="Fruit.cpp">
       <Filter>Source Files\GamePlay\Fruit</Filter>
     </ClCompile>
+    <ClCompile Include="WallSplash.cpp">
+      <Filter>Source Files\GamePlay\WallSplash</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GamePlay.hpp">
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="Fruit.hpp">
       <Filter>Source Files\GamePlay\Fruit</Filter>
+    </ClInclude>
+    <ClInclude Include="WallSplash.hpp">
+      <Filter>Source Files\GamePlay\WallSplash</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

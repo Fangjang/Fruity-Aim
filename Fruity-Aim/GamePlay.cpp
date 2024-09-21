@@ -85,7 +85,6 @@ void GamePlay::initGamePlay()
 	initVariables();
 }
 
-
 //Public Methods
 //Constructor
 GamePlay::GamePlay(sf::RenderWindow* window)
@@ -117,9 +116,8 @@ void GamePlay::update()
 			{
 				if (fruit->getGlobalBounds().contains(translated_pos))
 				{
-					vecWallSplash.push_back(spriteWallSplash);
-					vecWallSplash.back().setPosition(translated_pos.x - 50, translated_pos.y - 60);
-
+					vecWallSplash.push_back(WallSplash(
+						spriteWallSplash, sf::Vector2f(translated_pos.x - 50, translated_pos.y - 60)));
 					fruit = vecFruits.erase(fruit);
 				}
 				else
@@ -133,6 +131,27 @@ void GamePlay::update()
 	{
 		isMousePressed = false;
 	}
+
+	//Update fruit
+	for (auto& fruit : vecFruits)
+	{
+		fruit.update();
+	}
+
+	//Update the wall splash
+	std::vector<WallSplash>::iterator wallSplash = vecWallSplash.begin();
+	for (;wallSplash != vecWallSplash.end();)
+	{
+		wallSplash->update();
+		if (wallSplash->isDestroyed())
+		{
+			wallSplash = vecWallSplash.erase(wallSplash);
+		}
+		else
+		{
+			++wallSplash;
+		}
+	}
 }
 
 //Renders the game play
@@ -141,7 +160,7 @@ void GamePlay::render(sf::RenderWindow* window)
 	//Render the wall splash
 	for (auto& wallSplash : vecWallSplash)
 	{
-		window->draw(wallSplash);
+		wallSplash.render(window);
 	}
 
 	for (auto& fruit : vecFruits)

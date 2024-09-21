@@ -3,6 +3,7 @@
 
 #include "directives.hpp"
 #include "Fruit.hpp"
+#include "WallSplash.hpp"
 
 class GamePlay
 {
@@ -30,13 +31,15 @@ private:
 
 	//Wall Splash Sprite
 	sf::Sprite spriteWallSplash;
-	std::vector<sf::Sprite> vecWallSplash;
+	std::vector<WallSplash> vecWallSplash;
 
 	//GamePlay Methods
 	void initTextures();
 	void initVariables();
 	void initFonts();
 	void initGamePlay();
+
+	void caculateYpos();
 
 public:
 	//Constructor and Destructor

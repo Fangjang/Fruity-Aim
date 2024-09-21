@@ -6,6 +6,9 @@
 //Main function
 int main()
 {
+	//Seeding rand() fucntion
+	srand(time(nullptr));
+
 	//Create Game object
 	Game game;
 	while (game.isRunning())

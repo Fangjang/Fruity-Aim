@@ -16,6 +16,27 @@ private:
 		RIGHT
 	} enumRotationDirection;
 
+	//enum Falling state
+	enum class FallingState
+	{
+		RISING,
+		FALLING,
+		DESTROY
+	} enumFallingState;
+
+	//Maximum height and Spwaning Position
+	float fMaxHeight;
+	float fSpwanXpos;
+
+	//Rotation Speed
+	float fRotationSpeed;
+	//X axix move Threshold
+	float fMoveThresholdX;
+	//Y axis move Threshold
+	float fMoveThresholdY;
+	//Initial Speed
+	float fInitialSpeed;
+
 	//Main Furut Sprite
 	sf::Sprite spriteFruit;
 
