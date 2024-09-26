@@ -4,6 +4,9 @@
 //Initializes the textures
 void GamePlay::initTextures()
 {
+	//DEBUG
+	bisXpressed = false;
+
 	//Initalize Fruit texture tile
 	if (!textureFruitTile.loadFromFile("sprites/fruits.png"))
 	{
@@ -102,6 +105,21 @@ GamePlay::~GamePlay()
 //Updates the game play
 void GamePlay::update()
 {
+	//DEBUG
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::X))
+	{
+		if (!bisXpressed)
+		{
+			bisXpressed = true;
+			vecFruits.push_back(Fruit(spriteGrape));
+		}
+	}
+	else
+	{
+		bisXpressed = false;
+	}
+
+
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		if (!isMousePressed)
@@ -119,6 +137,7 @@ void GamePlay::update()
 					vecWallSplash.push_back(WallSplash(
 						spriteWallSplash, sf::Vector2f(translated_pos.x - 50, translated_pos.y - 60)));
 					fruit = vecFruits.erase(fruit);
+					vecFruits.push_back(Fruit(spriteGrape));
 				}
 				else
 				{
@@ -133,10 +152,28 @@ void GamePlay::update()
 	}
 
 	//Update fruit
-	for (auto& fruit : vecFruits)
+	std::vector<Fruit>::iterator fruit = vecFruits.begin();
+	for (; fruit != vecFruits.end();)
 	{
-		fruit.update();
+		fruit->update();
+		std::cout << "update" << std::endl;
+		std::cout << fruit->isDestroy() << std::endl;
+		//If the fruit falls beyond the screen size
+		if (fruit->isDestroy())
+		{
+			//Destructor of the current fruit class
+			fruit->~Fruit();
+			//delete current iterator
+			fruit = vecFruits.erase(fruit);
+			//vecFruits.push_back(spriteApple);
+		}
+		else
+		{
+			++fruit;
+		}
 	}
+
+
 
 	//Update the wall splash
 	std::vector<WallSplash>::iterator wallSplash = vecWallSplash.begin();

@@ -24,6 +24,9 @@ private:
 		DESTROY
 	} enumFallingState;
 
+	//First fruit
+	bool bFirstFruit;
+
 	//Maximum height and Spwaning Position
 	float fMaxHeight;
 	float fSpwanXpos;
@@ -32,10 +35,15 @@ private:
 	float fRotationSpeed;
 	//X axix move Threshold
 	float fMoveThresholdX;
-	//Y axis move Threshold
-	float fMoveThresholdY;
-	//Initial Speed
-	float fInitialSpeed;
+
+	//GRAVITY
+	// fInitialSpeedY
+	//low : 14f
+	//High: 18f
+	float fInitialSpeedY;
+	float fgravity = 15.0f;
+	//Clock
+	sf::Clock clock;
 
 	//Main Furut Sprite
 	sf::Sprite spriteFruit;
@@ -55,6 +63,9 @@ public:
 	sf::Vector2f getPosition();
 	//Return Global Bounds of sprite
 	sf::FloatRect getGlobalBounds();
+	
+
+	bool isDestroy();
 
 	void update();
 	void render(sf::RenderWindow& window);

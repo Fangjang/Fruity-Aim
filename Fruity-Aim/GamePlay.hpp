@@ -8,6 +8,10 @@
 class GamePlay
 {
 private:
+	//DEBUG
+	bool bisXpressed;
+
+
 	//GamePlay Variables
 	sf::RenderWindow* window;
 
@@ -38,8 +42,6 @@ private:
 	void initVariables();
 	void initFonts();
 	void initGamePlay();
-
-	void caculateYpos();
 
 public:
 	//Constructor and Destructor

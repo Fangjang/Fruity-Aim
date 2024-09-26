@@ -11,7 +11,7 @@ void WallSplash::initVariables()
 	clock.restart();
 	fAnimationTime = 300.0f;
 	fStaticDuration = 600.0f;
-	fFadeOutSpeed = 20.f;
+	fFadeOutSpeed = 10.f;
 }
 
 //Initializes the WallSplash Textures

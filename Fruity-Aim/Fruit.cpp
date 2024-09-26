@@ -11,7 +11,16 @@ void Fruit::initTextures()
 void Fruit::initVariables()
 {
 	//Set the Rotation Direction
-	enumRotationDirection = RotationDirection::LEFT;
+	bool tempDirectionLeft = rand() % 2;
+	if (tempDirectionLeft)
+	{
+		enumRotationDirection = RotationDirection::LEFT;
+	}
+	else
+	{
+		enumRotationDirection = RotationDirection::RIGHT;
+	}
+
 	//Set falling state
 	enumFallingState = FallingState::RISING;
 
@@ -19,16 +28,19 @@ void Fruit::initVariables()
 	fRotationSpeed = 5.0f;
 
 	//Set Gravity
-	fMaxHeight = rand() % (320 - 180) + 180;
+	fMaxHeight = rand() % (300 - 100) + 100;
 	//Set Spwaning Position on X axis
-	fSpwanXpos = rand() % (780 - 250) + 250;
+	fSpwanXpos = rand() % (690 - 115) + 115;
+
+	//Random Initial speed on y axis
+	fInitialSpeedY = rand() % (18 - 14) + 14;
 
 	//X axis move Threshold
 	fMoveThresholdX = 1.5f;
-	//Y axis move Threshold
-	fMoveThresholdY = 1.2f;
-	//Initial Speed
-	fInitialSpeed = 20.0f;
+
+	//GRAVITY
+	//CLOCK
+	clock.restart();
 
 	//Set the Fruit Sprite position
 	spriteFruit.setPosition(fSpwanXpos, 620.0f);
@@ -57,7 +69,7 @@ Fruit::Fruit(sf::Sprite fruit)
 //Fruit Destructor
 Fruit::~Fruit()
 {
-
+	std::cout << "Fruit Sprite Destroyed" << std::endl;
 }
 
 //Return position of sprite
@@ -72,9 +84,20 @@ sf::FloatRect Fruit::getGlobalBounds()
 	return spriteFruit.getGlobalBounds();
 }
 
+//Return true if enumFallingState is DESTROY
+bool Fruit::isDestroy()
+{
+	if (enumFallingState == FallingState::DESTROY)
+	{
+		return true;
+	}
+	return false;
+}
+
 //Updates the Fruit
 void Fruit::update()
 {
+	std::cout << fMaxHeight << std::endl;
 	//Rotate the Fruit
 	switch (enumRotationDirection)
 	{
@@ -94,25 +117,34 @@ void Fruit::update()
 	{
 	case Fruit::FallingState::RISING:
 		{
-			float tempYthrehold = fMoveThresholdY * (1.1 - fMoveThresholdY);
-			if (spriteFruit.getPosition().y > fMaxHeight && !(spriteFruit.getPosition().y - tempYthrehold < fMaxHeight))
+			//TEMP variables
+			std::cout << "Y: " << spriteFruit.getPosition().y << std::endl;	
+			float fTempVelocity = fgravity * clock.getElapsedTime().asSeconds();
+			std::cout << "Velocity: " << fTempVelocity << std::endl;
+
+			if (fInitialSpeedY - fTempVelocity < 0)
 			{
-				float tempY = fInitialSpeed * tempYthrehold;
-				spriteFruit.move(0.0f, -tempY);
+				float fTempTempVelocity = fMaxHeight - ((spriteFruit.getPosition().y) - (fInitialSpeedY - fTempVelocity));
+				std::cout << "Temp Velocity: " << fTempVelocity << std::endl;
+				spriteFruit.move(0.0f, -0.0f);
+				enumFallingState = FallingState::FALLING;
+				clock.restart();
 			}
 			else
 			{
-				enumFallingState = FallingState::FALLING;
+				spriteFruit.move(
+					0.0f, -(fInitialSpeedY - fTempVelocity) + 2.0f);
 			}
 			break;
 		}
 	case Fruit::FallingState::FALLING:
 		{
-			if (spriteFruit.getPosition().y < 650)
-			{
-				spriteFruit.move(0.0f, 20);
-			}
-			else
+			//TEMP variables
+			float fTempVelocity = fgravity * clock.getElapsedTime().asSeconds();
+
+			//Moving sprite with new velocity
+			spriteFruit.move(0.0f, fTempVelocity + 2.0f);
+			if (spriteFruit.getPosition().y > 650)
 			{
 				enumFallingState = FallingState::DESTROY;
 			}
@@ -120,6 +152,7 @@ void Fruit::update()
 		}
 	case Fruit::FallingState::DESTROY:
 		{
+			std::cout << "ENUM: DESTROY" << std::endl;
 			break;
 		}
 	default:
