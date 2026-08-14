@@ -162,10 +162,10 @@ void GamePlay::update()
 		if (fruit->isDestroy())
 		{
 			//Destructor of the current fruit class
-			fruit->~Fruit();
+			//fruit->~Fruit();
 			//delete current iterator
 			fruit = vecFruits.erase(fruit);
-			//vecFruits.push_back(spriteApple);
+			vecFruits.push_back(spriteApple);
 		}
 		else
 		{
